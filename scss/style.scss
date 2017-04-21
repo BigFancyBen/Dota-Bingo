@@ -10,7 +10,7 @@
 }
 
 .bingo-square {
-  border: #f0f 1px solid;
+  border: blue 1px solid;
   display: inline-block;
   height: 140px;
   margin: 5px;
@@ -19,8 +19,13 @@
 
   span {
     display: block;
+    padding: 5px;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
   }
+}
+
+.has-square {
+  background-color: #f0f;
 }

@@ -17,7 +17,13 @@ gulp.task('sass', function () {
                 .pipe(bs.reload({stream: true}));
 });
 
+gulp.task('js', function () {
+    return gulp.src('js/*js')
+        .pipe(gulp.dest('dist/js'));
+});
+
 gulp.task('watch', ['browser-sync'], function () {
     gulp.watch("scss/*.scss", ['sass']);
+    gulp.watch("js/*.js", ['js']);
     gulp.watch("*.html").on('change', bs.reload);
 });
