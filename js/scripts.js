@@ -6,8 +6,12 @@ request.onload = function() {
     // Success!
     var data = JSON.parse(this.response);
     console.log(data);
-    var d = document.getElementById("ggout");
-    d.className += " has-square";
+
+    if (data.my_word_counts.gg > 70 ){
+      var d = document.getElementById("ggout");
+      d.className += " has-square";
+    }
+
   } else {
     // We reached our target server, but it returned an error
 

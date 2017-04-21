@@ -19,7 +19,8 @@ gulp.task('sass', function () {
 
 gulp.task('js', function () {
     return gulp.src('js/*js')
-        .pipe(gulp.dest('dist/js'));
+        .pipe(gulp.dest('dist/js'))
+        .pipe(bs.reload({stream: true}));
 });
 
 gulp.task('watch', ['browser-sync'], function () {
