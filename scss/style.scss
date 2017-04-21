@@ -1,0 +1,26 @@
+.site-width {
+  margin: auto;
+  max-width: 1000px;
+
+}
+
+.bingo-board {
+  margin: auto;
+  width: 85%;
+}
+
+.bingo-square {
+  border: #f0f 1px solid;
+  display: inline-block;
+  height: 140px;
+  margin: 5px;
+  text-align: center;
+  width: 140px;
+
+  span {
+    display: block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
