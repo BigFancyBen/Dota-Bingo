@@ -12,6 +12,11 @@ request.onload = function() {
       d.className += " has-square";
     }
 
+    if (data.all_word_counts.gg < 250 ){
+      var d = document.getElementById("nogg");
+      d.className += " has-square";
+    }
+
   } else {
     // We reached our target server, but it returned an error
 

@@ -17,8 +17,12 @@
 
 <body>
   <div class="site-width">
-    <div class="steam-account">
-      <input id="steam-acc" type="number">
+    <div class="site-hero">
+      <h1>Dota 2 Matchmaking Bingo</h1>
+      <h2>Enter your Steam 32 ID</h2>
+      <div class="steam-account">
+        <input id="steam-acc" type="number" maxlength="8">
+      </div>
     </div>
     <div class="bingo-board">
       <table>
@@ -33,13 +37,22 @@
           <td class="bingo-square"><span>1</span></td>
           <td class="bingo-square"><span>2</span></td>
           <td class="bingo-square"><span>3</span></td>
-          <td class="bingo-square"><span>4</span></td>
+          <td class="bingo-square" id="nogg">
+            <span>GGEZ</span>
+            <div class="tooltip">Less than 25% of players said gg</div>
+          </td>
           <td class="bingo-square"><span>5</span></td>
         </td>
         <tr class="row-3">
-          <td class="bingo-square" id="ggout"><span>You say gg in 70% of matches</span></td>
+          <td class="bingo-square" id="ggout">
+            <span>Good Sport</span>
+            <div class="tooltip">Said gg in more than 70% of games</div>
+          </td>
           <td class="bingo-square"><span>2</span></td>
-          <td class="bingo-square"><span>Somebody Tilted (Free Space)</span></td>
+          <td class="bingo-square">
+            <span>(Free Space)</span>
+            <div class="tooltip has-square">Somebody Tilted</div>
+          </td>
           <td class="bingo-square"><span>4</span></td>
           <td class="bingo-square"><span>5</span></td>
         </tr>

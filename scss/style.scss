@@ -1,21 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Cinzel');
+
 .site-width {
   margin: auto;
   max-width: 1000px;
+  font: 12px 'Cinzel', sans-serif;
+}
 
+.site-hero {
+  text-align: center;
+
+  h1,
+  h2 {
+    margin: 0px
+  }
 }
 
 .bingo-board {
   margin: auto;
-  width: 85%;
+  width: 682px;
+}
+
+.steam-account {
+  display: inline-block;
+  padding: 10px 0;
+
+  input[type="number"] {
+    width: 120px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
 }
 
 .bingo-square {
-  border: blue 1px solid;
+  border: grey 1px solid;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   display: inline-block;
-  height: 140px;
+  height: 120px;
   margin: 5px;
   text-align: center;
-  width: 140px;
+  width: 120px;
 
   span {
     display: block;
@@ -27,5 +49,33 @@
 }
 
 .has-square {
-  background-color: #f0f;
+  background-color: #e0f7d4;
+  opacity: .8;
+}
+
+.bingo-square:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.tooltip {
+  background-color: #555;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  color: #fff;
+  opacity: 0;
+  padding: 5px 2px;
+  text-align: center;
+  transition: .5s;
+  visibility: hidden;
+  width: 100px;
+  top: -20px;
+  left: 9px;
+  position: relative;
+  font-size: 11px;
+  line-height: 12px;
+}
+
+.bingo-square:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
 }
