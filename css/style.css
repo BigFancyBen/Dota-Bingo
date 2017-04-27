@@ -1,32 +1,46 @@
 @import url("https://fonts.googleapis.com/css?family=Cinzel");
-.site-width {
+body {
   margin: auto;
-  max-width: 1000px;
   font: 12px 'Cinzel', sans-serif; }
 
 .site-hero {
-  text-align: center; }
-  .site-hero h1,
-  .site-hero h2 {
-    margin: 0px; }
+  text-align: left;
+  position: absolute;
+  left: 10px;
+  margin: auto;
+  position: relative;
+  width: 682px; }
+  .site-hero h1 {
+    margin: 0; }
 
 .bingo-board {
   margin: auto;
   width: 682px; }
 
-.steam-account {
+.user-input {
   display: inline-block;
-  padding: 10px 0; }
-  .steam-account input[type="number"] {
+  padding-bottom: 10px;
+  width: 682px; }
+  .user-input input[type="number"],
+  .user-input input[type="text"] {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid black;
+    outline: 0;
     width: 120px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+    font: 12px 'Cinzel', sans-serif;
+    text-align: left; }
+  .user-input input[type=number]::-webkit-inner-spin-button,
+  .user-input input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; }
 
 .bingo-square {
   border: grey 1px solid;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   display: inline-block;
   height: 120px;
-  margin: 5px;
+  margin: 2px;
   text-align: center;
   width: 120px; }
   .bingo-square span {
@@ -41,25 +55,38 @@
   opacity: .8; }
 
 .bingo-square:hover {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22); }
 
 .tooltip {
   background-color: #555;
   border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   color: #fff;
   opacity: 0;
-  padding: 5px 2px;
+  padding: 5px 4px 8px 4px;
   text-align: center;
   transition: .5s;
   visibility: hidden;
   width: 100px;
   top: -20px;
-  left: 9px;
+  left: 7px;
   position: relative;
   font-size: 11px;
   line-height: 12px; }
 
 .bingo-square:hover .tooltip {
   opacity: 1;
-  visibility: visible; }
+  visibility: visible;
+  padding-top: 10px; }
+
+.form-and {
+  font-size: 10px;
+  font-style: italic;
+  padding-top: 5px; }
+
+.form-or {
+  font-style: italic;
+  padding: 0 5px; }
+
+.inline-block {
+  display: inline-block; }

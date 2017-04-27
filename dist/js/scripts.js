@@ -1,37 +1,66 @@
-var player_id = 49697106;
-var request = new XMLHttpRequest();
-request.open('GET', 'https://api.opendota.com/api/players/'+ player_id +'/wordcloud?limit=100', true);
+// let player_id = 49697106;
+// let match_id = 3132493264;
+// let player_name = "Big Fancy Ben";
+let player_id = "";
+let match_id = "";
+let player_name = "";
+let player_slot = "";
+let player_side = "";
+let player_won = "";
+let player_hero = "";
+let data = "";
+let player = "";
 
-request.onload = function() {
-  if (this.status >= 200 && this.status < 400) {
-    // Success!
-    var data = JSON.parse(this.response);
-
-    if (data.my_word_counts.gg > 70 ){
-      var d = document.getElementById("ggout");
-      d.className += " has-square";
+let queryString = (window.location.search).substring(1);
+if (queryString){
+  queries = queryString.split("&");
+  for(let i=0; i<queries.length; i++) {
+    let param = queries[i].split('=');
+    if (param[0] == "match_id") {
+      match_id=param[1];
     }
-
-    if (data.all_word_counts.gg < 250 ){
-      var d = document.getElementById("nogg");
-      d.className += " has-square";
+    if (param[0] == "player_id"){
+      player_id=param[1];
     }
-
-  } else {
-    // We reached our target server, but it returned an error
-
+    if (param[0] == "player_name"){
+      player_name = decodeURI(param[1]);
+    }
   }
-};
-
-var request2 = new XMLHttpRequest();
-request2.open('GET', 'https://api.opendota.com/api/players/'+ player_id +'/pros?limit=100&win=1', true);
-
-request2.onload = function() {
-  if (this.status >= 200 && this.status < 400) {
-    // Success!
-    var data = JSON.parse(this.response);
-  }
+  makeCard();
 }
 
-request.send();
-request2.send();
+document.getElementById("submit-button").onclick = function makeCard () {
+  match_id = document.getElementById("match-id").value;
+  player_name = document.getElementById("steam-name").value;
+  //player_id = document.getElementById("steam-acc").value;
+  let queryParamString = `match_id=${match_id}&player_id=${player_id}&player_name=${player_name}`;
+  window.location.search = queryParamString;
+  makeCard();
+}
+
+function makeCard () {
+  let request = new XMLHttpRequest();
+  console.log(match_id);
+  console.log(player_name);
+  request.open('GET', 'https://api.opendota.com/api/matches/'+ match_id, true);
+  request.onload = function() {
+    if (this.status >= 200 && this.status < 400) {
+      // Success!
+      data = JSON.parse(this.response);
+      console.log(data);
+      for(i=0; i<10; i++){
+        if(data.players[i].personaname.toLowerCase() == player_name.toLowerCase())  {
+          player_won = !!data.players[i].win;
+          player_side = data.players[i].isRadiant;
+          player_slot = i;
+          player_hero = data.players[i].hero_id;
+          player = data.players[player_slot];
+        }
+      }
+      checkSquares();
+    } else {
+      console.log("opendota api error");
+    }
+  };
+  request.send();
+}

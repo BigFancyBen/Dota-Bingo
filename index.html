@@ -19,60 +19,72 @@
   <div class="site-width">
     <div class="site-hero">
       <h1>Dota 2 Matchmaking Bingo</h1>
-      <h2>Enter your Steam 32 ID</h2>
-      <div class="steam-account">
-        <input id="steam-acc" type="number" maxlength="8">
+      <div class="user-input">
+        <div class="form-field">
+          <div class="form-label">Match ID:<br></div>
+          <input id="match-id" type="number" maxlength="10">
+        </div>
+        <div class="form-and">and</div>
+        <div class="form-field inline-block">
+          <div class="">Steam ID:<br></div>
+          <input id="steam-acc" type="number" maxlength="8">
+        </div>
+        <div class="form-or inline-block">
+          or
+        </div>
+        <div class="form-field inline-block">
+          <div class="form-label">Steam Name:<br></div>
+          <input id="steam-name" type="text" >
+        </div>
       </div>
+      <button type="button" name="submit" id="submit-button">SUBMIT</button>
     </div>
+
     <div class="bingo-board">
       <table>
         <tr class="row-1">
-          <td class="bingo-square"><span>1</span></td>
-          <td class="bingo-square"><span>2</span></td>
-          <td class="bingo-square"><span>3</span></td>
-          <td class="bingo-square"><span>4</span></td>
-          <td class="bingo-square"><span>5</span></td>
+          <td class="bingo-square" id="card-1-1"><span>1</span></td>
+          <td class="bingo-square" id="card-1-2"></td>
+          <td class="bingo-square" id="card-1-3"><span>3</span></td>
+          <td class="bingo-square" id="card-1-4"><span>4</span></td>
+          <td class="bingo-square" id="card-1-5"><span>5</span></td>
         </tr>
         <tr class="row-2">
-          <td class="bingo-square"><span>1</span></td>
-          <td class="bingo-square"><span>2</span></td>
-          <td class="bingo-square"><span>3</span></td>
-          <td class="bingo-square" id="nogg">
-            <span>GGEZ</span>
-            <div class="tooltip">Less than 25% of players said gg</div>
-          </td>
-          <td class="bingo-square"><span>5</span></td>
+          <td class="bingo-square" id="card-2-1"><span>1</span></td>
+          <td class="bingo-square" id="card-2-2"><span>2</span></td>
+          <td class="bingo-square" id="card-2-3"><span>3</span></td>
+          <td class="bingo-square" id="card-2-4"><span>4</span></td>
+          <td class="bingo-square" id="card-2-5"><span>5</span></td>
         </td>
         <tr class="row-3">
-          <td class="bingo-square" id="ggout">
-            <span>Good Sport</span>
-            <div class="tooltip">Said gg in more than 70% of games</div>
-          </td>
-          <td class="bingo-square"><span>2</span></td>
+          <td class="bingo-square" id="card-3-1"></td>
+          <td class="bingo-square" id="card-3-2"><span>2</span></td>
           <td class="bingo-square">
             <span>(Free Space)</span>
             <div class="tooltip has-square">Somebody Tilted</div>
           </td>
-          <td class="bingo-square"><span>4</span></td>
-          <td class="bingo-square"><span>5</span></td>
+          <td class="bingo-square" id="card-3-4"><span>4</span></td>
+          <td class="bingo-square" id="card-3-5"><span>5</span></td>
         </tr>
         <tr class="row-4">
-          <td class="bingo-square"><span>1</span></td>
-          <td class="bingo-square"><span>2</span></td>
-          <td class="bingo-square"><span>3</span></td>
-          <td class="bingo-square"><span>4</span></td>
-          <td class="bingo-square"><span>5</span></td>
+          <td class="bingo-square" id="card-4-1"><span>1</span></td>
+          <td class="bingo-square" id="card-4-2"><span>2</span></td>
+          <td class="bingo-square" id="card-4-3"><span>3</span></td>
+          <td class="bingo-square" id="card-4-4"><span>4</span></td>
+          <td class="bingo-square" id="card-4-5"><span>5</span></td>
         </tr>
         <tr class="row-5">
-          <td class="bingo-square"><span>1</span></td>
-          <td class="bingo-square"><span>2</span></td>
-          <td class="bingo-square"><span>3</span></td>
-          <td class="bingo-square"><span>4</span></td>
-          <td class="bingo-square"><span>5</span></td>
+          <td class="bingo-square" id="card-5-1"><span>1</span></td>
+          <td class="bingo-square" id="card-5-2"><span>2</span></td>
+          <td class="bingo-square" id="card-5-3"></td>
+          <td class="bingo-square" id="card-5-4"><span>4</span></td>
+          <td class="bingo-square" id="card-5-5"><span>5</span></td>
         </tr>
       </table>
     </div>
   </div>
+  <script src="js/heroes.js"></script>
+  <script src="js/cards.js"></script>
   <script src="js/scripts.js"></script>
 </body>
 </html>
