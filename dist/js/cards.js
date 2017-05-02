@@ -3,6 +3,7 @@ function checkSquares() {
   cardStrHeroes("card-5-3");
   cardKillStreaks("card-3-1");
   cardFarmFail("card-1-2");
+  cardQuickBlink("card-2-3");
 
 }
 
@@ -12,7 +13,7 @@ function cardKillStreaks(card_id){
   if (player.kill_streaks) {
     if (player.kill_streaks[15] >= 1) {
       addSquare(card_id, "Running Riot", "15+ kill streak", true);
-    } if (player.kill_streaks[10] >= 1) {
+    } else if (player.kill_streaks[10] >= 1) {
       addSquare(card_id, card_name, card_tooltip, true);
     } else {
       addSquare(card_id, card_name, card_tooltip, false);
@@ -43,6 +44,17 @@ function cardStrHeroes(card_id){
   }
 }
 
+function cardQuickBlink(card_id){
+  let card_name = "In a blink";
+  let card_tooltip = "Farm a blink dagger before 12 minutes";
+
+  if (player.first_purchase_time.blink < 720) {
+    addSquare(card_id, card_name, card_tooltip, true);
+  } else {
+    addSquare(card_id, card_name, card_tooltip, false);
+  }
+}
+
 function cardFarmFail(card_id){
   let card_name = "Team???";
   let card_tooltip ="Lots of farm during laning, but lose the game";
@@ -53,6 +65,7 @@ function cardFarmFail(card_id){
     addSquare(card_id, card_name, card_tooltip, false);
   }
 }
+
 function addSquare(card_id, card_name, card_tooltip, card_completed) {
   let card = `<span>${card_name}</span><div class='tooltip'>${card_tooltip}</div>`;
   let d = document.getElementById(card_id)
@@ -60,5 +73,7 @@ function addSquare(card_id, card_name, card_tooltip, card_completed) {
 
   if(card_completed) {
     d.className += " has-square";
+  } else {
+    d.classList.remove("has-square");
   }
 }
