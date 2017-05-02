@@ -60,7 +60,7 @@ function makeCard () {
     if (this.status >= 200 && this.status < 400) {
       // Success!
       data = JSON.parse(this.response);
-      console.log("hello");
+      console.log(data);
       if(player_name){
         for(i=0; i<10; i++){
           if(data.players[i].personaname)  {

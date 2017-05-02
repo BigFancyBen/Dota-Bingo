@@ -1,9 +1,15 @@
 function checkSquares() {
-
-  cardStrHeroes("card-5-3");
+  let cardArray = [cardStrHeroes,cardKillStreaks,cardQuickBlink,cardFarmFail,cardMoneyHand];
+  cardArray[0]("card-5-3");
   cardKillStreaks("card-3-1");
   cardFarmFail("card-1-2");
   cardQuickBlink("card-2-3");
+  cardMoneyHand("card-1-5");
+  cardRandomWin("card-2-1");
+  cardThrowGame("card-3-5");
+  cardSpeedrun("card-4-2");
+  cardLongGame("card-1-4");
+  cardSalty("card-1-1");
 
 }
 
@@ -60,6 +66,113 @@ function cardFarmFail(card_id){
   let card_tooltip ="Lots of farm during laning, but lose the game";
 
   if (player.lane_efficiency_pct >= 80 && player_won == 0){
+    addSquare(card_id, card_name, card_tooltip, true);
+  } else {
+    addSquare(card_id, card_name, card_tooltip, false);
+  }
+}
+
+function cardMoneyHand(card_id){
+  let card_name = "Not Listening"
+  let card_tooltip = "5+ midases in the game"
+
+  let num_midases = 0;
+
+  for(i=0; i<10; i++){
+    if(data.players[i].item_usage.hand_of_midas){
+      num_midases++;
+    }
+  }
+
+  if (num_midases >= 5){
+    addSquare(card_id, card_name, card_tooltip, true);
+  } else {
+    addSquare(card_id, card_name, card_tooltip, false);
+  }
+}
+
+function cardRandomWin(card_id) {
+  let card_name = "Gaben's Choice"
+  let card_tooltip = "Random your hero and then win the game"
+
+  if(player.randomed == true && player_won == 1) {
+    addSquare(card_id, card_name, card_tooltip, true);
+  } else {
+    addSquare(card_id, card_name, card_tooltip, false);
+  }
+}
+
+function cardThrowGame(card_id) {
+  let card_name = "322";
+  let card_tooltip = "Be 10k+ gold ahead, but lose anyway"
+  let max_gold_lead = 0;
+  if(player_side == 1){
+    for(let i = 0; i < data.radiant_gold_adv.length; i++) {
+      if(data.radiant_gold_adv[i] > max_gold_lead ) {
+        max_gold_lead = data.radiant_gold_adv[i];
+      }
+    }
+  } else {
+    for(let i = 0; i < data.radiant_gold_adv.length; i++) {
+      if(data.radiant_gold_adv[i]*-1 > max_gold_lead ) {
+        max_gold_lead = data.radiant_gold_adv[i]*-1;
+      }
+    }
+  }
+  var lead_formatted = max_gold_lead.toLocaleString('en-US', {minimumFractionDigits: 0});
+
+  if(max_gold_lead > 10000 && player_won == 0) {
+    addSquare(card_id, card_name,  `You threw a ${lead_formatted} gold lead`, true);
+  } else {
+    addSquare(card_id, card_name, card_tooltip, false);
+  }
+}
+
+function cardSpeedrun(card_id) {
+  let card_name ="Dota2 speedrun (any %)";
+  let card_tooltip="Win in under 25 minutes";
+
+  if(data.duration < 1500 && player_won){
+    addSquare(card_id, card_name, card_tooltip, true);
+  } else {
+    addSquare(card_id, card_name, card_tooltip, false);
+  }
+}
+
+function cardLongGame(card_id) {
+  let card_name ="5 more minutes mom";
+  let card_tooltip="Win a game that went on for longer than 1 hr";
+
+  if(data.duration > 3600 && player_won){
+    addSquare(card_id, card_name, card_tooltip, true);
+  } else {
+    addSquare(card_id, card_name, card_tooltip, false);
+  }
+}
+
+function cardSalty(card_id){
+  let card_name ="Salty";
+  let card_tooltip ="Nobody on the losing team said GG";
+  let loser_ggs = 0;
+  if (data.radiant_win){
+    for(let i=0; i<data.chat.length; i++){
+      if(data.chat[i].slot > 4) {
+        if(data.chat[i].key.toLowerCase().includes("gg")){
+          loser_ggs++;
+        }
+      }
+    }
+  } else {
+    for(let i=0; i<data.chat.length; i++){
+      if(data.chat[i].slot < 5) {
+        if(data.chat[i].key.toLowerCase().includes("gg")){
+          loser_ggs++;
+        }
+      }
+    }
+  }
+
+  if(loser_ggs == 0){
     addSquare(card_id, card_name, card_tooltip, true);
   } else {
     addSquare(card_id, card_name, card_tooltip, false);
