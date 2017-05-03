@@ -43,33 +43,21 @@ function cardStrHeroes(card_id){
     }
   }
 
-  if (str_heroes == 5){
-    addSquare(card_id, card_name, card_tooltip, true);
-  } else {
-    addSquare(card_id, card_name, card_tooltip, false);
-  }
+  addSquare(card_id, card_name, card_tooltip, str_heroes == 5);
 }
 
 function cardQuickBlink(card_id){
   let card_name = "In a blink";
   let card_tooltip = "Farm a blink dagger before 12 minutes";
 
-  if (player.first_purchase_time.blink < 720) {
-    addSquare(card_id, card_name, card_tooltip, true);
-  } else {
-    addSquare(card_id, card_name, card_tooltip, false);
-  }
+  addSquare(card_id, card_name, card_tooltip, player.first_purchase_time.blink < 720);
 }
 
 function cardFarmFail(card_id){
   let card_name = "Team???";
   let card_tooltip ="Lots of farm during laning, but lose the game";
 
-  if (player.lane_efficiency_pct >= 80 && player_won == 0){
-    addSquare(card_id, card_name, card_tooltip, true);
-  } else {
-    addSquare(card_id, card_name, card_tooltip, false);
-  }
+  addSquare(card_id, card_name, card_tooltip, player.lane_efficiency_pct >= 80 && player_won == 0);
 }
 
 function cardMoneyHand(card_id){
@@ -84,22 +72,14 @@ function cardMoneyHand(card_id){
     }
   }
 
-  if (num_midases >= 5){
-    addSquare(card_id, card_name, card_tooltip, true);
-  } else {
-    addSquare(card_id, card_name, card_tooltip, false);
-  }
+  addSquare(card_id, card_name, card_tooltip, num_midases >= 5);
 }
 
 function cardRandomWin(card_id) {
   let card_name = "Gaben's Choice"
   let card_tooltip = "Random your hero and then win the game"
 
-  if(player.randomed == true && player_won == 1) {
-    addSquare(card_id, card_name, card_tooltip, true);
-  } else {
-    addSquare(card_id, card_name, card_tooltip, false);
-  }
+  addSquare(card_id, card_name, card_tooltip, player.randomed == true && player_won == 1);
 }
 
 function cardThrowGame(card_id) {
@@ -132,22 +112,14 @@ function cardSpeedrun(card_id) {
   let card_name ="Dota2 speedrun (any %)";
   let card_tooltip="Win in under 25 minutes";
 
-  if(data.duration < 1500 && player_won){
-    addSquare(card_id, card_name, card_tooltip, true);
-  } else {
-    addSquare(card_id, card_name, card_tooltip, false);
-  }
+  addSquare(card_id, card_name, card_tooltip, data.duration < 1500 && player_won);
 }
 
 function cardLongGame(card_id) {
   let card_name ="5 more minutes mom";
   let card_tooltip="Win a game that went on for longer than 1 hr";
 
-  if(data.duration > 3600 && player_won){
-    addSquare(card_id, card_name, card_tooltip, true);
-  } else {
-    addSquare(card_id, card_name, card_tooltip, false);
-  }
+  addSquare(card_id, card_name, card_tooltip, data.duration > 3600 && player_won);
 }
 
 function cardSalty(card_id){
@@ -172,11 +144,7 @@ function cardSalty(card_id){
     }
   }
 
-  if(loser_ggs == 0){
-    addSquare(card_id, card_name, card_tooltip, true);
-  } else {
-    addSquare(card_id, card_name, card_tooltip, false);
-  }
+  addSquare(card_id, card_name, card_tooltip, loser_ggs == 0);
 }
 
 function addSquare(card_id, card_name, card_tooltip, card_completed) {
