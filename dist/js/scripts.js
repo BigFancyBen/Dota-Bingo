@@ -1,16 +1,24 @@
 function checkSquares() {
-  let cardArray = [cardStrHeroes,cardKillStreaks,cardQuickBlink,cardFarmFail,cardMoneyHand];
-  cardArray[0]("card-5-3");
-  cardKillStreaks("card-3-1");
-  cardFarmFail("card-1-2");
-  cardQuickBlink("card-2-3");
-  cardMoneyHand("card-1-5");
-  cardRandomWin("card-2-1");
-  cardThrowGame("card-3-5");
-  cardSpeedrun("card-4-2");
-  cardLongGame("card-1-4");
-  cardSalty("card-1-1");
+  let cardArray = [cardStrHeroes,cardKillStreaks,cardQuickBlink,cardFarmFail,
+      cardMoneyHand,cardRandomWin,cardThrowGame,cardSpeedrun,cardLongGame,
+      cardSalty,cardDrowStrat];
 
+  let randomCard = shuffle(cardArray, player_id);
+  let currentCard = 0;
+  matchHeroes();
+
+  while(randomCard[currentCard]){
+    for(let y = 1; y<6;y++){
+      for(let x = 1; x<6;x++){
+        if(!(x==3 && y==3)){
+          if(typeof randomCard[currentCard] != 'undefined'){
+            randomCard[currentCard](`card-${y}-${x}`);
+            currentCard++;
+          }
+        }
+      }
+    }
+  }
 }
 
 function cardKillStreaks(card_id){
@@ -31,19 +39,15 @@ function cardKillStreaks(card_id){
 
 function cardStrHeroes(card_id){
   let card_name = "Popeye's Spinach";
-  let card_tooltip ="5 strength heroes";
+  let card_tooltip ="7+ strength heroes in the game";
   let str_heroes = 0;
 
-  for(i=0; i<10; i++){
-    if(data.players[i].isRadiant == player_side ){
-      let x = parseInt([data.players[i].hero_id])-2;
-      if (heroes[x].primary_attr == "str"){
-        str_heroes++;
-      }
+  for(let i=0; i<10; i++){
+    if(current_heroes[i].primary_attr == "str"){
+      str_heroes++;
     }
   }
-
-  addSquare(card_id, card_name, card_tooltip, str_heroes == 5);
+  addSquare(card_id, card_name, card_tooltip, str_heroes >= 7);
 }
 
 function cardQuickBlink(card_id){
@@ -66,7 +70,7 @@ function cardMoneyHand(card_id){
 
   let num_midases = 0;
 
-  for(i=0; i<10; i++){
+  for(let i=0; i<10; i++){
     if(data.players[i].item_usage.hand_of_midas){
       num_midases++;
     }
@@ -147,6 +151,41 @@ function cardSalty(card_id){
   addSquare(card_id, card_name, card_tooltip, loser_ggs == 0);
 }
 
+function cardDrowStrat(card_id){
+  let card_name = "Drow Strat";
+  let card_tooltip ="Drow Ranger with 3+ ranged heroes";
+  let ranged_heroes = 0;
+  let drow_side = null;
+
+  for(let i=0; i<10; i++){
+    if(data.players[i].hero_id == "6" ){
+      drow_side = data.players[i].isRadiant
+    }
+  }
+  if(drow_side != null){
+    if(!drow_side){
+      for(let i=5; i<10; i++){
+        ranged_heroes++;
+      }
+    } else {
+      for(let i=0; i<5; i++){
+        ranged_heroes++;
+      }
+    }
+  }
+  addSquare(card_id, card_name, card_tooltip, ranged_heroes >= 3);
+}
+
+function matchHeroes () {
+  for(let i=0; i<10; i++){
+    let cur_hero = data.players[i].hero_id;
+    for(let j=0; j<heroes.length;j++){
+      if(heroes[j].id == cur_hero){
+        current_heroes.push(heroes[j]);
+      }
+    }
+  }
+}
 function addSquare(card_id, card_name, card_tooltip, card_completed) {
   let card = `<span>${card_name}</span><div class='tooltip'>${card_tooltip}</div>`;
   let d = document.getElementById(card_id)
@@ -172,6 +211,7 @@ let player_won = "";
 let player_hero = "";
 let data = "";
 let player = "";
+let current_heroes = [];
 
 let queryString = (window.location.search).substring(1);
 if (queryString){
@@ -199,7 +239,6 @@ document.getElementById("submit-button").onclick = function getCardInput () {
   match_id = document.getElementById("match-id").value;
   player_name = document.getElementById("steam-name").value;
   player_name = player_name.toLowerCase();
-  console.log(player_name);
   player_id = document.getElementById("steam-acc").value;
   if (match_id == "") {
     console.log("No Match ID");
@@ -227,6 +266,7 @@ function makeCard () {
         for(i=0; i<10; i++){
           if(data.players[i].personaname)  {
             if (data.players[i].personaname.toLowerCase() == player_name) {
+              player_id = data.players[i].account_id;
               player_slot = i;
               setPlayerVars();
             }
@@ -237,6 +277,7 @@ function makeCard () {
         for(i=0; i<10; i++){
           if(data.players[i].account_id)  {
             if (data.players[i].account_id == player_id) {
+              player_name = data.players[i].personaname.toLowerCase();
               player_slot = i;
               setPlayerVars();
             }
@@ -257,4 +298,30 @@ function setPlayerVars() {
   player_won = !!player.win;
   player_side = player.isRadiant;
   player_hero = player.hero_id;
+}
+function createSeed (length) {
+  let seed = Math.random();
+
+  while (length > 1) {
+    seed = seed * (length--);
+  }
+  seed = Math.floor(seed);
+  return seed;
+}
+
+function shuffle (array, seed) {
+  let length = array.length;
+  seed = seed || seed === 0 ? Math.floor(seed) : createSeed(length);
+  let count = 0;
+  let shuffleTo;
+  let temp;
+  while (count !== length - 1 && seed) {
+    shuffleTo = seed % (length - count);
+    seed = (seed - shuffleTo) / (length - count);
+    temp = array[count];
+    array[count] = array[count + shuffleTo];
+    array[count + shuffleTo] = temp;
+    count++;
+  }
+  return array;
 }

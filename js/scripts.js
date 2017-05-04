@@ -10,6 +10,7 @@ let player_won = "";
 let player_hero = "";
 let data = "";
 let player = "";
+let current_heroes = [];
 
 let queryString = (window.location.search).substring(1);
 if (queryString){
@@ -37,7 +38,6 @@ document.getElementById("submit-button").onclick = function getCardInput () {
   match_id = document.getElementById("match-id").value;
   player_name = document.getElementById("steam-name").value;
   player_name = player_name.toLowerCase();
-  console.log(player_name);
   player_id = document.getElementById("steam-acc").value;
   if (match_id == "") {
     console.log("No Match ID");
@@ -65,6 +65,7 @@ function makeCard () {
         for(i=0; i<10; i++){
           if(data.players[i].personaname)  {
             if (data.players[i].personaname.toLowerCase() == player_name) {
+              player_id = data.players[i].account_id;
               player_slot = i;
               setPlayerVars();
             }
@@ -75,6 +76,7 @@ function makeCard () {
         for(i=0; i<10; i++){
           if(data.players[i].account_id)  {
             if (data.players[i].account_id == player_id) {
+              player_name = data.players[i].personaname.toLowerCase();
               player_slot = i;
               setPlayerVars();
             }
