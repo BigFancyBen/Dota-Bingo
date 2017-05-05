@@ -3,6 +3,7 @@
 body {
   margin: auto;
   font: 12px 'Cinzel', sans-serif;
+  font-weight: 600;
 }
 
 .site-hero {
@@ -79,17 +80,18 @@ body {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   color: #fff;
   font-size: 11px;
+  font-weight: 200;
   font-family: Segoe UI;
-  left: 7px;
   line-height: 12px;
   opacity: 0;
   padding: 5px 4px 8px 4px;
-  position: relative;
+  position: absolute;
   text-align: center;
-  top: -20px;
   transition: .5s;
   visibility: hidden;
   width: 100px;
+  margin-left: 6px;
+  margin-top: 5px;
 }
 
 .bingo-square:hover .tooltip {

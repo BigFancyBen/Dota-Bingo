@@ -187,7 +187,7 @@ function matchHeroes () {
   }
 }
 function addSquare(card_id, card_name, card_tooltip, card_completed) {
-  let card = `<span>${card_name}</span><div class='tooltip'>${card_tooltip}</div>`;
+  let card = `<div class='tooltip'>${card_tooltip}</div><span>${card_name}</span>`;
   let d = document.getElementById(card_id)
   d.innerHTML = card;
 
