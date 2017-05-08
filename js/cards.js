@@ -1,7 +1,7 @@
 function checkSquares() {
   let cardArray = [cardStrHeroes,cardKillStreaks,cardQuickBlink,cardFarmFail,
       cardMoneyHand,cardRandomWin,cardThrowGame,cardSpeedrun,cardLongGame,
-      cardSalty,cardDrowStrat];
+      cardSalty,cardDrowStrat,cardSoloSupport];
 
   let randomCard = shuffle(cardArray, player_id);
   let currentCard = 0;
@@ -38,8 +38,8 @@ function cardKillStreaks(card_id){
 }
 
 function cardStrHeroes(card_id){
-  let card_name = "Popeye's Spinach";
-  let card_tooltip ="7+ strength heroes in the game";
+  let card_name = "Strength in Numbers";
+  let card_tooltip ="6+ strength heroes in the game";
   let str_heroes = 0;
 
   for(let i=0; i<10; i++){
@@ -47,7 +47,7 @@ function cardStrHeroes(card_id){
       str_heroes++;
     }
   }
-  addSquare(card_id, card_name, card_tooltip, str_heroes >= 7);
+  addSquare(card_id, card_name, card_tooltip, str_heroes >= 6);
 }
 
 function cardQuickBlink(card_id){
@@ -130,7 +130,7 @@ function cardSalty(card_id){
   let card_name ="Salty";
   let card_tooltip ="Nobody on the losing team said GG";
   let loser_ggs = 0;
-  if (data.radiant_win){
+  if (data.radiant_win && data.chat){
     for(let i=0; i<data.chat.length; i++){
       if(data.chat[i].slot > 4) {
         if(data.chat[i].key.toLowerCase().includes("gg")){
@@ -138,7 +138,7 @@ function cardSalty(card_id){
         }
       }
     }
-  } else {
+  } else if (data.chat) {
     for(let i=0; i<data.chat.length; i++){
       if(data.chat[i].slot < 5) {
         if(data.chat[i].key.toLowerCase().includes("gg")){
@@ -149,6 +149,27 @@ function cardSalty(card_id){
   }
 
   addSquare(card_id, card_name, card_tooltip, loser_ggs == 0);
+}
+
+function cardSoloSupport(card_id){
+  let card_name ="Single Mother of 4";
+  let card_tooltip ="Buy 90%+ of the obs/sentries";
+  let team_wards = 0;
+  let player_wards = 0;
+  let ward_pct = 0;
+
+  for(let i=0; i<10; i++){
+    if(data.players[i].isRadiant == player_side){
+        team_wards += ifExists(data.players[i].purchase_ward_observer);
+        team_wards += ifExists(data.players[i].purchase_ward_sentry);
+    }
+  }
+
+  player_wards = ifExists(player.purchase_ward_observer) + ifExists(player.purchase_ward_sentry);
+  if(team_wards>0){
+    ward_pct = player_wards/team_wards;
+  }
+  addSquare(card_id, card_name, card_tooltip, ward_pct>=.9);
 }
 
 function cardDrowStrat(card_id){
@@ -174,6 +195,14 @@ function cardDrowStrat(card_id){
     }
   }
   addSquare(card_id, card_name, card_tooltip, ranged_heroes >= 3);
+}
+
+function ifExists (maybeExists){
+  if(maybeExists){
+    return maybeExists;
+  }else{
+    return 0;
+  }
 }
 
 function matchHeroes () {
