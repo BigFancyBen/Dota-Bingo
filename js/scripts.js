@@ -14,7 +14,7 @@ let current_heroes = [];
 
 let queryString = (window.location.search).substring(1);
 if (queryString){
-  queries = queryString.split("&");
+  let queries = queryString.split("&");
   for(let i=0; i<queries.length; i++) {
     let param = queries[i].split('=');
     if (param[0] == "match_id") {
@@ -62,7 +62,7 @@ function makeCard () {
       data = JSON.parse(this.response);
       console.log(data);
       if(player_name){
-        for(i=0; i<10; i++){
+        for(let i=0; i<10; i++){
           if(data.players[i].personaname)  {
             if (data.players[i].personaname.toLowerCase() == player_name) {
               player_id = data.players[i].account_id;
@@ -73,7 +73,7 @@ function makeCard () {
         }
       }
       else if (player_id) {
-        for(i=0; i<10; i++){
+        for(let i=0; i<10; i++){
           if(data.players[i].account_id)  {
             if (data.players[i].account_id == player_id) {
               player_name = data.players[i].personaname.toLowerCase();

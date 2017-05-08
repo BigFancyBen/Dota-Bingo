@@ -5,6 +5,7 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
+const babel = require('gulp-babel');
 
 gulp.task('browser-sync', ['sass'], function() {
   bs.init({
@@ -24,6 +25,10 @@ gulp.task('sass', function () {
 gulp.task('js', function () {
   return gulp.src('js/*js')
     .pipe(concat('scripts.js'))
+    .pipe(babel({
+            presets: ['es2015']
+        }))
+    .pipe(uglify())
     .pipe(gulp.dest('dist/js'))
     .pipe(bs.reload({stream: true}));
 });

@@ -80,7 +80,7 @@ function cardThrowGame(card_id) {
       }
     }
   }
-  var lead_formatted = max_gold_lead.toLocaleString('en-US', {minimumFractionDigits: 0});
+  let lead_formatted = max_gold_lead.toLocaleString('en-US', {minimumFractionDigits: 0});
 
   if(max_gold_lead > 10000 && player_won == 0) {
     addSquare(card_id, card_name,  `You threw a ${lead_formatted} gold lead`, true);
