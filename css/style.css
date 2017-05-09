@@ -1,49 +1,56 @@
 @import url("https://fonts.googleapis.com/css?family=Cinzel");
 body {
-  margin: auto;
+  background-color: #1c2124;
+  color: #dbdbdb;
+  font-weight: 600;
   font: 12px 'Cinzel', sans-serif;
-  font-weight: 600; }
+  margin: auto; }
 
 .site-hero {
-  text-align: left;
-  position: absolute;
-  left: 10px;
   margin: auto;
+  position: absolute;
   position: relative;
-  width: 682px; }
+  text-align: left;
+  width: 524px; }
   .site-hero h1 {
     margin: 0; }
+  .site-hero button {
+    background-color: #5a5a64;
+    color: #dbdbdb;
+    margin-bottom: 5px; }
 
 .bingo-board {
   margin: auto;
-  width: 682px; }
+  width: 524px; }
 
 .user-input {
   display: inline-block;
   padding-bottom: 10px;
-  width: 682px; }
+  width: 524px; }
   .user-input input[type="number"],
   .user-input input[type="text"] {
     background: transparent;
+    border-bottom: 1px solid #dbdbdb;
     border: 0;
-    border-bottom: 1px solid black;
-    outline: 0;
-    width: 120px;
+    color: #dbdbdb;
     font: 12px 'Cinzel', sans-serif;
-    text-align: left; }
+    outline: 0;
+    text-align: left;
+    width: 120px; }
   .user-input input[type=number]::-webkit-inner-spin-button,
   .user-input input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0; }
 
 .bingo-square {
-  border: grey 1px solid;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  background-color: #5a5a64;
+  border: grey 2px solid;
   display: inline-block;
-  height: 120px;
-  margin: 2px;
+  height: 100px;
+  margin: -2px -1px;
   text-align: center;
-  width: 120px; }
+  width: 100px;
+  z-index: 100; }
   .bingo-square span {
     display: block;
     padding: 5px;
@@ -52,44 +59,57 @@ body {
     transform: translateY(-50%); }
 
 .has-square {
-  background-color: #e0f7d4;
-  opacity: .8; }
-
-.bingo-square:hover {
-  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22); }
+  background-color: #325446; }
 
 .tooltip {
-  background-color: #555;
-  border-radius: 6px;
+  background-color: #181818;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   color: #fff;
-  font-size: 11px;
-  font-weight: 200;
-  font-family: Segoe UI;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 300;
   line-height: 12px;
+  margin-left: -18px;
+  margin-top: 2px;
   opacity: 0;
-  padding: 5px 4px 8px 4px;
+  padding: 8px;
   position: absolute;
   text-align: center;
   transition: .5s;
   visibility: hidden;
-  width: 100px;
-  margin-left: 6px;
-  margin-top: 5px; }
+  width: 120px;
+  z-index: 300; }
 
 .bingo-square:hover .tooltip {
   opacity: 1;
-  visibility: visible;
-  padding-top: 10px; }
+  padding-top: 10px;
+  visibility: visible; }
 
 .form-and {
+  color: #b2b2b2;
   font-size: 10px;
   font-style: italic;
   padding-top: 5px; }
 
 .form-or {
+  color: #b2b2b2;
   font-style: italic;
   padding: 0 5px; }
 
 .inline-block {
   display: inline-block; }
+
+.form-label:hover .match-id-location {
+  opacity: 1;
+  padding-top: 10px;
+  visibility: visible; }
+
+.match-id-location {
+  left: 130px;
+  opacity: 0;
+  position: absolute;
+  top: 30px;
+  transition: .5s;
+  visibility: hidden; }
+  .match-id-location img {
+    width: 340px; }
