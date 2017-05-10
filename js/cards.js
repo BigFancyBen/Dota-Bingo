@@ -31,7 +31,7 @@ function cardQuickBlink(card_id){
   let card_name = "In a blink";
   let card_tooltip = "Farm a blink dagger before 12 minutes";
 
-  addSquare(card_id, card_name, card_tooltip, player.first_purchase_time.blink < 720);
+  addSquare(card_id, card_name, card_tooltip, (player.first_purchase_time.blink || 1000) < 720);
 }
 
 function cardFarmFail(card_id){
