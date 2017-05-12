@@ -48,18 +48,18 @@ document.getElementById("submit-button").onclick = function getCardInput () {
     history.pushState (null, null, "?" + queryParamString);
     makeCard();
   }
-
 }
 
 function makeCard () {
   let request = new XMLHttpRequest();
-  console.log(match_id);
-  console.log(player_name);
+  console.log("Match ID: " + match_id);
+  console.log("Player Name: " + player_name);
   request.open('GET', 'https://api.opendota.com/api/matches/'+ match_id, true);
   request.onload = function() {
     if (this.status >= 200 && this.status < 400) {
       // Success!
       data = JSON.parse(this.response);
+      console.log("Entire match's data ");
       console.log(data);
       if(player_name){
         for(let i=0; i<10; i++){
@@ -93,6 +93,7 @@ function makeCard () {
 
 function setPlayerVars() {
   player = data.players[player_slot];
+  console.log("Just the player's data");
   console.log(player);
   player_won = !!player.win;
   player_side = player.isRadiant;
