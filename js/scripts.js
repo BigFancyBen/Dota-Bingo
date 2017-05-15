@@ -18,15 +18,15 @@ if (queryString){
   for(let i=0; i<queries.length; i++) {
     let param = queries[i].split('=');
     if (param[0] == "match_id") {
-      match_id=param[1];
+      match_id=String(param[1]);
       document.getElementById("match-id").value = match_id;
     }
     if (param[0] == "player_id"){
-      player_id=param[1];
+      player_id=String(param[1]);
       document.getElementById("steam-acc").value = player_id;
     }
     if (param[0] == "player_name"){
-      player_name = decodeURI(param[1]);
+      player_name = decodeURI(String(param[1]));
       document.getElementById("steam-name").value = player_name;
       player_name = player_name.toLowerCase();
     }
@@ -44,7 +44,7 @@ document.getElementById("submit-button").onclick = function getCardInput () {
   } if (player_name == "" && player_id == "") {
     console.log("No player info");
   } else {
-    let queryParamString = `match_id=${match_id}&player_id=${player_id}&player_name=${player_name}`;
+    let queryParamString = `match_id=${match_id}&player_id=${player_id}&player_name=${encodeURI(player_name)}`;
     history.pushState (null, null, "?" + queryParamString);
     makeCard();
   }
@@ -53,6 +53,7 @@ document.getElementById("submit-button").onclick = function getCardInput () {
 function makeCard () {
   let request = new XMLHttpRequest();
   console.log("Match ID: " + match_id);
+  console.log("Steam ID: " + player_id);
   console.log("Player Name: " + player_name);
   request.open('GET', 'https://api.opendota.com/api/matches/'+ match_id, true);
   request.onload = function() {
