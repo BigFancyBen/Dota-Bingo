@@ -188,15 +188,56 @@ function cardBountiful(card_id){
 }
 
 function cardStopComing(card_id){
-  let card_name = "Stay Dead";
+  let card_name = "Bully";
   let card_tooltip ="Kill the same player 5+ times";
-  console.log(player.killed.length);
+  let most_killed = 0;
 
-  for(let i=0; i<player.killed.length; i++){
-    if (player.killed[i].includes("npc_dota_hero")){
-      console.log(player.killed[i]);
+  let obj = player.killed;
+  Object.keys(obj).forEach(function(key) {
+    if(key.includes("npc_dota_hero")){
+      if(obj[key] > most_killed) {
+          most_killed = obj[key];
+      }
     }
-  }
+  });
+  addSquare(card_id, card_name, card_tooltip, most_killed > 4);
+}
 
-  addSquare(card_id, card_name, card_tooltip, true);
+function cardRich(card_id){
+  let card_name = "Trust Fund";
+  let card_tooltip ="600+ gpm";
+
+  addSquare(card_id, card_name, card_tooltip, player.benchmarks.gold_per_min.raw > 600);
+}
+
+function cardEfficient(card_id){
+  let card_name = "Black^ fanboy";
+  let card_tooltip ="10+ lasthits/minute";
+
+  addSquare(card_id, card_name, card_tooltip, player.benchmarks.last_hits_per_min.raw > 10);
+}
+
+function cardRampage(card_id){
+  let card_name = "Ultra Kill";
+  let card_tooltip ="Get an Ultra Kill";
+
+  if(ifExists(player.multi_kills[5])){
+    addSquare(card_id, "Rampage!", "Get a Rampage", true);
+  }else {
+    addSquare(card_id, card_name, card_tooltip, ifExists(player.multi_kills[4]));
+  }
+}
+
+function cardBuybacks(card_id){
+  let card_name = "Insert Coins to Continue";
+  let card_tooltip ="More than one buyback";
+
+  addSquare(card_id, card_name, card_tooltip, buyback_count > 1);
+}
+
+function cardFountainDive(card_id){
+  let card_name = "What Objective?";
+  let card_tooltip ="Take damage from the enemy team's fountain";
+
+  addSquare(card_id, card_name, card_tooltip, ifExists(player.damage_taken.dota_fountain) > 0);
 }

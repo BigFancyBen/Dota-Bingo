@@ -2,7 +2,7 @@ function checkSquares() {
   let cardArray = [cardStrHeroes,cardKillStreaks,cardQuickBlink,cardFarmFail,
       cardMoneyHand,cardRandomWin,cardThrowGame,cardSpeedrun,cardLongGame,
       cardSalty,cardDrowStrat,cardSoloSupport,cardObjectiveGamer,cardBountiful,
-      cardStopComing];
+      cardStopComing,cardRich,cardEfficient,cardRampage,cardFountainDive];
 
   let randomCard = shuffle(cardArray, player_id);
   let currentCard = 0;
