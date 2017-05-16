@@ -4,6 +4,7 @@ var bs = require('browser-sync').create();
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
+var cssnano = require('gulp-cssnano');
 const babel = require('gulp-babel');
 
 gulp.task('browser-sync', ['sass'], function() {
@@ -17,6 +18,7 @@ gulp.task('browser-sync', ['sass'], function() {
 gulp.task('sass', function () {
   return gulp.src('scss/*.scss')
     .pipe(sass())
+    .pipe(cssnano())
     .pipe(gulp.dest('css'))
     .pipe(bs.reload({stream: true}));
 });
