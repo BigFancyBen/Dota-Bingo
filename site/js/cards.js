@@ -180,3 +180,23 @@ function cardObjectiveGamer(card_id){
 
   addSquare(card_id, card_name, card_tooltip, ifExists(player.tower_damage) > ifExists(player.hero_damage));
 }
+
+function cardBountiful(card_id){
+  let card_name = "Bountiful";
+  let card_tooltip ="Pick up 10+ Bounty runes";
+  addSquare(card_id, card_name, card_tooltip, ifExists(player.runes[5])> 10);
+}
+
+function cardStopComing(card_id){
+  let card_name = "Stay Dead";
+  let card_tooltip ="Kill the same player 5+ times";
+  console.log(player.killed.length);
+
+  for(let i=0; i<player.killed.length; i++){
+    if (player.killed[i].includes("npc_dota_hero")){
+      console.log(player.killed[i]);
+    }
+  }
+
+  addSquare(card_id, card_name, card_tooltip, true);
+}

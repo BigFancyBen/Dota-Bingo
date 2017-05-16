@@ -35,7 +35,7 @@ gulp.task('js', function () {
 gulp.task('watch', ['browser-sync'], function () {
   gulp.watch("scss/*.scss", ['sass']);
   gulp.watch("js/*.js", ['js']);
-  gulp.watch("*.html").on('change', bs.reload);
+  gulp.watch("index.html").on('change', bs.reload);
 });
 
 var jsFiles = 'js/*.js',
