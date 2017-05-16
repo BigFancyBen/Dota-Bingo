@@ -241,3 +241,46 @@ function cardFountainDive(card_id){
 
   addSquare(card_id, card_name, card_tooltip, ifExists(player.damage_taken.dota_fountain) > 0);
 }
+
+function cardDewarded(card_id){
+  let card_name = "Map Controlled";
+  let card_tooltip = "3+ observer wards killed"
+
+  addSquare(card_id, card_name, card_tooltip, player.observer_kills > 2);
+}
+
+function cardStacks(card_id){
+  let card_name = "401k";
+  let card_tooltip = "Stack 5+ camps";
+
+  addSquare(card_id, card_name, card_tooltip, player.camps_stacked > 4);
+}
+
+function cardCourierSnipe(card_id){
+  let card_name = "Animal Abuse";
+  let card_tooltip = "Kill the enemy courier";
+
+  addSquare(card_id, card_name, card_tooltip, player.courier_kills > 0);
+}
+
+function cardDenies(card_id){
+  let card_name = "Dendi?";
+  let card_tooltip = "25+ denies";
+
+  addSquare(card_id, card_name, card_tooltip, player.denies > 24);
+}
+
+function cardLateDonkey(card_id){
+  let card_name = "No Fly Zone";
+  let card_tooltip = "Walking courier past 6 minutes";
+  let courier_time = -1;
+
+  for(let i=0; i<10; i++) {
+    if(data.players[i].isRadiant == player_side){
+      if(data.players[i].first_purchase_time.flying_courier){
+        courier_time = data.players[i].first_purchase_time.flying_courier;
+      }
+    }
+  }
+  addSquare(card_id, card_name, card_tooltip, courier_time > 360);
+}
