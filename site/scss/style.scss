@@ -1,16 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Cinzel');
+$site-bg-color: #1c2124;
+$site-text-color: #dbdbdb;
+$bg-grey: #5a5a64;
+$successful-green: #325446;
+$border-light: #ccc;
+$border-dark: #333;
+$grey: #808080;
+$tooltip-bg: #181818;
+$white: #fff;
+$hero-small: #b2b2b2;
+$link-on-grey: #9cf;
 
 body {
-  background-color: #1c2124;
-  color: #dbdbdb;
-  font-weight: 600;
+  background-color: $site-bg-color;
+  color: $site-text-color;
   font: 12px 'Cinzel', sans-serif;
+  font-weight: 600;
   margin: auto;
 }
 
 .site-hero {
   margin: auto;
-  position: absolute;
   position: relative;
   text-align: left;
   width: 524px;
@@ -18,9 +28,14 @@ body {
   h1 {
     margin: 0;
   }
+
   button {
-    background-color: #5a5a64;
-    color: #dbdbdb;
+    background-color: $bg-grey;
+    border-bottom: 1px solid $border-dark;
+    border-left: 1px solid $border-light;
+    border-right: 1px solid $border-dark;
+    border-top: 1px solid $border-light;
+    color: $site-text-color;
     margin-bottom: 5px;
   }
 }
@@ -39,8 +54,8 @@ body {
   input[type="text"] {
     background: transparent;
     border: 0;
-    border-bottom: 1px solid #dbdbdb;
-    color: #dbdbdb;
+    border-bottom: 1px solid $site-text-color;
+    color: $site-text-color;
     font: 12px 'Cinzel', sans-serif;
     outline: 0;
     text-align: left;
@@ -60,8 +75,8 @@ body {
 }
 
 .bingo-square {
-  background-color: #5a5a64;
-  border: grey 2px solid;
+  background-color: $bg-grey;
+  border: $grey 2px solid;
   display: inline-block;
   height: 100px;
   margin: -2px -1px;
@@ -79,13 +94,13 @@ body {
 }
 
 .has-square {
-  background-color: #325446;
+  background-color: $successful-green;
 }
 
 .tooltip {
-  background-color: #181818;
+  background-color: $tooltip-bg;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  color: #fff;
+  color: $white;
   font-family: Arial;
   font-size: 12px;
   font-weight: 300;
@@ -109,14 +124,14 @@ body {
 }
 
 .form-and {
-  color: #b2b2b2;
+  color: $hero-small;
   font-size: 10px;
   font-style: italic;
   padding-top: 5px;
 }
 
 .form-or {
-  color: #b2b2b2;
+  color: $hero-small;
   font-style: italic;
   padding: 0 5px;
 }
@@ -125,21 +140,43 @@ body {
   display: inline-block;
 }
 
-.form-label:hover .match-id-location {
-  opacity: 1;
-  padding-top: 10px;
-  visibility: visible;
+.how-to {
+  left: 155px;
+  position: absolute;
+  top: 24px;
+
+  .help {
+    background-color: $bg-grey;
+    border-bottom: 1px solid $border-dark;
+    border-left: 1px solid $border-light;
+    border-right: 1px solid $border-dark;
+    border-top: 1px solid $border-light;
+    color: $site-text-color;
+    padding: 3px 5px;
+    text-align: center;
+    width: 60px;
+  }
+
+  .instructions {
+    background-color: $bg-grey;
+    border: $grey 2px solid;
+    left: 128px;
+    opacity: 0;
+    padding: 8px;
+    position: absolute;
+    top: 0;
+    transition: .5s;
+    visibility: hidden;
+    width: 200px;
+
+    a {
+      color: $link-on-grey;
+      text-decoration: none;
+    }
+  }
 }
 
-.match-id-location {
-  left: 130px;
-  opacity: 0;
-  position: absolute;
-  top: 30px;
-  transition: .5s;
-  visibility: hidden;
-
-  img {
-    width: 340px;
-  }
+.how-to:hover .instructions {
+  opacity: 1;
+  visibility: visible;
 }
