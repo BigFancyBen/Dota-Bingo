@@ -5,7 +5,7 @@ function checkSquares() {
       cardStopComing,cardRich,cardEfficient,cardRampage,cardFountainDive,
       cardDewarded,cardStacks,cardCourierSnipe,cardDenies,cardLateDonkey];
 
-  let randomCard = shuffle(cardArray, player_id);
+  let randomCard = shuffle(cardArray, match_id*player_id);
   let currentCard = 0;
   matchHeroes();
 
